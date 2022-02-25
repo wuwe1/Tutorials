@@ -61,6 +61,9 @@ rule balanceChangesFromCertainFunctions(method f, address user){
 // This rule breaks also on a fixed version of ERC20 -
 // why? understand the infeasible state that the rule start with 
 rule totalSupplyNotLessThanSingleUserBalance(method f, address user) {
+    // @note infeasible state
+    // `burn`: `burning amount` + `userBalanceBefore` > `totalSupplyBefore`
+    // `transfer` & `transferFrom`: `fromBalance` + `userBalanceBefore` > 'totalSuuplyBefore'
 	env e;
 	calldataarg args;
 	uint256 totalSupplyBefore = totalSupply(e);

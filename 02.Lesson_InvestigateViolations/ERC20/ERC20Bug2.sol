@@ -274,6 +274,8 @@ contract ERC20 is IERC20, IERC20Metadata {
         _beforeTokenTransfer(sender, recipient, amount);
 
         uint256 senderBalance = _balances[sender];
+        // @note should check balance
+        require(senderBalance >= amount);
         unchecked {
             _balances[sender] = senderBalance - amount;
         }

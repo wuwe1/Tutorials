@@ -64,7 +64,9 @@ contract MeetingScheduler is IMeetingScheduler {
             startTime > block.timestamp,
             "invalid start time, meeting has to be scheduled in the future"
         );
-        require(endTime >= startTime, "meeting has to end after it starts");
+        // require(endTime >= startTime, "meeting has to end after it starts");
+        // @note endTime can not be equal to startTime
+        require(endTime > startTime, "meeting has to end after it starts");
         meetings[meetingId] = ScheduledMeeting({
             startTime: startTime,
             endTime: endTime,
