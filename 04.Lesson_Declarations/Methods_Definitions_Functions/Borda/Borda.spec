@@ -3,17 +3,68 @@ methods {
     getFullVoterDetails(address) returns (uint8, bool, bool, uint256, bool) envfree
     getPointsOfContender(address) returns (uint256) envfree
     getFullContenderDetails(address) returns (uint8, bool, uint256) envfree
-}
+}   
+
 
 function getAgeOfVoter(address voter) returns uint8 {
-    uint8 age;
-    bool registeredBefore; 
-    bool voted; 
-    uint256 vote_attempts; 
-    bool blocked_before;
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
     age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
     return age;
 } 
+
+function getRegisteredOfVoter(address voter) returns bool {
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+    age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
+    return registeredBefore;
+} 
+
+function getVotedOfVoter(address voter) returns bool {
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+    age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
+    return voted;
+
+} 
+function getVoteAttemptsOfVoter(address voter) returns uint256 {
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+    age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
+    return vote_attempts;
+} 
+
+function getBlackListOfVoter(address voter) returns bool {
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+    age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
+    return blocked_before;
+} 
+
+definition unRegisteredVoter(address voter) returns bool = 
+    getAgeOfVoter(voter) == 0 &&
+    !getRegisteredOfVoter(voter) &&
+    !getVotedOfVoter(voter) &&
+    getVoteAttemptsOfVoter(voter) == 0 &&
+    !getBlackListOfVoter(voter);
+    
+definition registeredYetVotedVoter(address voter) returns bool = 
+    getAgeOfVoter(voter) != 0 &&
+    getRegisteredOfVoter(voter) &&
+    !getVotedOfVoter(voter) &&
+    getVoteAttemptsOfVoter(voter) == 0 &&
+    !getBlackListOfVoter(voter);
+
+definition legitRegisteredVotedVoter(address voter) returns bool = 
+    getAgeOfVoter(voter) != 0 &&
+    getRegisteredOfVoter(voter) &&
+    getVotedOfVoter(voter) &&
+    getVoteAttemptsOfVoter(voter) > 0 &&
+    getVoteAttemptsOfVoter(voter) < 3 &&
+    !getBlackListOfVoter(voter);
+    
+definition blockedVoter(address voter) returns bool = 
+    getAgeOfVoter(voter) != 0 &&
+    getRegisteredOfVoter(voter) &&
+    getVotedOfVoter(voter) &&
+    getVoteAttemptsOfVoter(voter) >= 3 &&
+    getBlackListOfVoter(voter);
+
 
 // Checks that a voter's "registered" mark is changed correctly - 
 // If it's false after a function call, it was false before
