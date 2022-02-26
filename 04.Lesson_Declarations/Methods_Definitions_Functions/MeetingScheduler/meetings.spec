@@ -22,7 +22,37 @@ methods {
 	getEndTimeById(uint256) returns (uint256) envfree
 	getStateById(uint256) returns (uint8) envfree	
 	getNumOfParticipents(uint256) returns (uint256) envfree
+	getOrganizer(uint256) returns (address) envfree
 }
+
+definition meetingUninitialized(uint256 meetingId) returns bool = 
+    getStartTimeById(meetingId) == 0 &&
+	getEndTimeById(meetingId) == 0 && 
+	getNumOfParticipents(meetingId) == 0 && 
+	getStateById(meetingId) == 0 && 
+	getOrganizer(meetingId) == 0;
+
+definition meetingPending(uint256 meetingId) returns bool = 
+    getStateById(meetingId) == 1 &&
+	getNumOfParticipents(meetingId) == 0 && 
+	getStartTimeById(meetingId) != 0 &&
+	getEndTimeById(meetingId) != 0 &&
+	getOrganizer(meetingId) != 0;
+
+definition meetingStarted(uint256 meetingId) returns bool =  
+    getStateById(meetingId) == 2 &&
+	getStartTimeById(meetingId) != 0 &&
+	getEndTimeById(meetingId) != 0;
+
+definition meetingEnded(uint256 meetingId) returns bool =  
+    getStateById(meetingId) == 3 && 
+	getStartTimeById(meetingId) != 0 &&
+	getEndTimeById(meetingId) != 0;
+
+definition meetingCancelled(uint256 meetingId) returns bool =  
+    getStateById(meetingId) == 4 && 
+	getStartTimeById(meetingId) != 0 &&
+	getEndTimeById(meetingId) != 0;
 
 
 // Checks that when a meeting is created, the planned end time is greater than the start time
