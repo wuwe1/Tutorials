@@ -1,0 +1,15 @@
+## Auction Properties Solution
+
+### variable transition
+- prize decrease only
+- bid expiry increase only
+
+### high-level
+- payment is invariant
+- total supply >= the sum of balances of all users
+- token supply should be bounded
+
+
+### unit test
+- mint should increase balances[who] by amount
+- transferTo should increase balances[to] by _value and decrease balances[msg.sender] by _value
