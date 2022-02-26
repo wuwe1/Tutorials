@@ -5,8 +5,12 @@ methods {
     getFullContenderDetails(address) returns (uint8, bool, uint256) envfree
 }
 
-fucntion getAgeOfVoter(address vote) returns (uint8) {
-    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+function getAgeOfVoter(address voter) returns uint8 {
+    uint8 age;
+    bool registeredBefore; 
+    bool voted; 
+    uint256 vote_attempts; 
+    bool blocked_before;
     age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
     return age;
 } 
