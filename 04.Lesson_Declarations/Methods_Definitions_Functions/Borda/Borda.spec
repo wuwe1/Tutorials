@@ -5,6 +5,12 @@ methods {
     getFullContenderDetails(address) returns (uint8, bool, uint256) envfree
 }
 
+fucntion getAgeOfVoter(address vote) returns (uint8) {
+    uint8 age; bool registeredBefore; bool voted; uint256 vote_attempts; bool blocked_before;
+    age, registeredBefore, voted, vote_attempts, blocked_before = getFullVoterDetails(voter);
+    return age;
+} 
+
 // Checks that a voter's "registered" mark is changed correctly - 
 // If it's false after a function call, it was false before
 // If it's true after a function call, it either started as true or changed from false to true via registerVoter()
