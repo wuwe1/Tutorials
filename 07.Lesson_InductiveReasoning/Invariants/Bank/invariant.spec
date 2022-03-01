@@ -46,3 +46,6 @@ hook Sstore funds[KEY address user] uint256 new_balance
 
 invariant totalFunds_GE_to_sum_of_all_funds()
     getTotalFunds() >= sum_of_all_funds()
+    
+invariant totalFunds_EQ_to_sum_of_all_funds()
+    getTotalFunds() == sum_of_all_funds()
