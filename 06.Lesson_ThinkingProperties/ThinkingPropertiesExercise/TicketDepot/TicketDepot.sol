@@ -88,4 +88,34 @@ contract TicketDepot {
 			delete offerings[offerID];  
 	} 
 
+	function getOwnerById(uint16 eventID) public view returns (address) {
+		return eventsMap[eventID].owner;
+	}
+	
+	function getTicketPriceById(uint16 eventID) public view returns (uint64) {
+		return eventsMap[eventID].ticketPrice;
+	}
+
+	function getTicketsRemainingById(uint16 eventID) public view returns (uint16) {
+		return eventsMap[eventID].ticketsRemaining;
+	}
+
+	function getBuyerById(uint16 eventID, uint16 ticketID) public view returns (address) {
+		bytes32 offerID = keccak256(abi.encode(eventID, ticketID));
+		return offerings[offerID].buyer;
+	}
+
+	function getPriceById(uint16 eventID, uint16 ticketID) public view returns (uint64) {
+		bytes32 offerID = keccak256(abi.encode(eventID, ticketID));
+		return offerings[offerID].price;
+	}
+
+	function getDeadlineById(uint16 eventID, uint16 ticketID) public view returns (uint256) {
+		bytes32 offerID = keccak256(abi.encode(eventID, ticketID));
+		return offerings[offerID].deadline;
+	}
+
+	function getNumEvents() public view returns (uint16) {
+		return numEvents;
+	}
 } 

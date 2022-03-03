@@ -14,6 +14,8 @@ rule uniqueManagerAsRule(uint256 fundId1, uint256 fundId2, method f) {
 	
 	// hint: add additional variables just to look at the current state
 	// bool active1 = isActiveManager(getCurrentManager(fundId1));			
+	require(isActiveManager(getCurrentManager(fundId1)));
+	require(isActiveManager(getCurrentManager(fundId2)));
 	
 	env e;
 	calldataarg args;

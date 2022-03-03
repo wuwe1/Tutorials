@@ -38,11 +38,11 @@ You will find out that it is an iterative process. While writing rules, you will
 
 </br>
 
-- [ ] Follow the instructions on [Thinking Properties Exercise](ThinkingPropertiesExercise) to exercise some more on coming up with properties, categorizing them, and prioritizing them.
+- [x] Follow the instructions on [Thinking Properties Exercise](ThinkingPropertiesExercise) to exercise some more on coming up with properties, categorizing them, and prioritizing them.
 
 </br>
 
-- [ ] Create a `.spec` file for [MeetingScheduler](ThinkingPropertiesExercise/MeetingScheduler) and [TicketDepot](ThinkingPropertiesExercise/TicketDepot), and try to prove 5 properties in each of them based on your properties.
+- [x] Create a `.spec` file for [MeetingScheduler](ThinkingPropertiesExercise/MeetingScheduler) and [TicketDepot](ThinkingPropertiesExercise/TicketDepot), and try to prove 5 properties in each of them based on your properties.
 
 Upload your solutions to the directories to get review by the Certora team.
 
